@@ -110,5 +110,9 @@ tourguide:
         - IDAS_API_KEY=tourguide-devices
         - IDM_HOSTNAME=keyrock
         - IDM_PORT=8000
+    expose:
+        - "80"
+    ports:
+        - "80:80"
     volumes_from:
         - keyrock
