@@ -90,7 +90,7 @@ cygnus:
         - CYGNUS_MYSQL_PASS=mysql
 
 tourguide:
-    image: fiware/tutorials.tourguide-app:latest
+    image: hedata/tour_guide:latest
     hostname: tourguide
     container_name: tourguide
     links:
