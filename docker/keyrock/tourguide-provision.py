@@ -84,12 +84,12 @@ def test_data(keystone_path='./keystone/'):
     # TODO: modify the url + callback when the app is ready
     tourguide_app = keystone.oauth2.consumers.create(
         name='TourGuide',
-        redirect_uris=['http://tourguide/login'],
+        redirect_uris=['http://130.206.127.12/login'],
         description='Fiware TourGuide Application',
         scopes=['all_info'],
         client_type='confidential',
         grant_type='authorization_code',
-        url='http://tourguide',
+        url='http://130.206.127.12',
         img='/static/dashboard/img/logos/small/app.png')
     provider_role = next(r for r
                          in keystone.fiware_roles.roles.list()
