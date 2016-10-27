@@ -10,7 +10,7 @@ check_var TOURGUIDE_USER
 check_var TOURGUIDE_USER_DIR
 check_var TOURGUIDE_HOSTNAME $(hostname)
 #do different deploy configs here for now - not the best place though
-check_var IDM_HOSTNAME 130.206.127.12
+check_var IDM_HOSTNAME keyrock
 check_var IDM_PORT 5000
 
 check_var FIWARE_SERVICE tourguide
