@@ -4,7 +4,7 @@ var config = {};
 
 // URL to the FI-WARE Identity Management GE
 // default: https://account.lab.fi-ware.org
-config.idmUrl = 'http://localhost:8000';
+config.idmUrl = 'http://IDM_HOSTNAME:IDM_PORT';
 
 // Oauth2 configuration
 // Found on the application profile page after registering
@@ -18,7 +18,7 @@ config.clientSecret = 'CLIENT_SECRET';
 
 // Callback URL for the application
 // TODO: make callback URL configurable as the others
-config.callbackUrl = 'http://localhost/login';
+config.callbackUrl = 'http://TOURGUIDE_HOSTNAME/login';
 
 config.responseType = 'code';
 
