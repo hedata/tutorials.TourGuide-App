@@ -68,17 +68,22 @@ USER ${TOURGUIDE_USER}
 WORKDIR ${TOURGUIDE_USER_DIR}
 
 # get the repository from git and install node dependencies
-RUN git clone -b ${GIT_REV_TOURGUIDE} ${GIT_URL_TOURGUIDE} && \
-    cd ${CC_APP_SERVER_PATH} && \
+COPY . ./tutorials.TourGuide-App
+USER root
+WORKDIR ${TOURGUIDE_USER_DIR}
+RUN chown -R ${TOURGUIDE_USER}:${TOURGUIDE_USER} tutorials.TourGuide-App
+USER ${TOURGUIDE_USER}
+WORKDIR ${TOURGUIDE_USER_DIR}
+RUN cd ${CC_APP_SERVER_PATH} && \
     npm install --loglevel warn && \
     rm -fr ${TOURGUIDE_USER_DIR}/.npm
 
 # copy default subscriptions
-COPY cpr-registration.sh ${SUBSCRIPTIONS_PATH}/
+COPY docker/images/tutorials.tourguide-app/cpr-registration.sh ${SUBSCRIPTIONS_PATH}/
 
 # Switch back to root for docker-entrypoint.sh
 USER root
-ADD docker-entrypoint.sh /docker-entrypoint.sh
+ADD docker/images/tutorials.tourguide-app/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 ADD https://raw.githubusercontent.com/Bitergia/docker/master/utils/entrypoint-common.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

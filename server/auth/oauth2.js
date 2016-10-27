@@ -19,10 +19,12 @@ exports.OAuth2 = function(clientId, clientSecret, baseSite, authorizePath,
   accessTokenPath, callbackURL, customHeaders) {
   this._clientId = clientId;
   this._clientSecret = clientSecret;
-  this._baseSite = baseSite;
+  //VERY DIRTY HACK
+  this._baseSite = 'http://130.206.127.12:8000';
   this._authorizeUrl = authorizePath || '/oauth/authorize';
   this._accessTokenUrl = accessTokenPath || '/oauth/access_token';
-  this._callbackURL = callbackURL;
+  //VERY DIRTY HACK
+  this._callbackURL = 'http://130.206.127.12/login';
   this._accessTokenName = 'access_token';
   this._authMethod = 'Basic';
   this._customHeaders = customHeaders || {};
@@ -38,7 +40,9 @@ exports.OAuth2.prototype.setAccessTokenName = function(name) {
 };
 
 exports.OAuth2.prototype._getAccessTokenUrl = function() {
-  return this._baseSite + this._accessTokenUrl;
+  //DIRTY HACK
+  console.log("ACCESS TOKEN URL http://keyrock:8000" + this._accessTokenUrl);
+  return "http://keyrock:8000" + this._accessTokenUrl;
 };
 
 // Build the authorization header.
@@ -151,7 +155,9 @@ exports.OAuth2.prototype._executeRequest = function(httpLibrary, options,
 exports.OAuth2.prototype.getAuthorizeUrl = function(responseType) {
 
   responseType = responseType || 'code';
-
+  console.log("CALLING GET AUTH URL "+this._baseSite + this._authorizeUrl + '?response_type=' +
+    responseType + '&client_id=' + this._clientId +
+    '&state=xyz&redirect_uri=' + this._callbackURL);
   return this._baseSite + this._authorizeUrl + '?response_type=' +
     responseType + '&client_id=' + this._clientId +
     '&state=xyz&redirect_uri=' + this._callbackURL;

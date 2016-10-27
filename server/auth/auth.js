@@ -39,6 +39,7 @@ var oauth = new OAuth2(clientId,
 */
 exports.login = function(req, res) {
   // Using the access code goes again to the IDM to obtain the accessToken
+  console.log("QUERY CODE "+req.query.code);
   oauth.getOAuthAccessToken(req.query.code, function(e, results) {
     if (results === undefined) {
       res.status(404);
@@ -93,6 +94,7 @@ exports.getUserData = function(req, res) {
   var user = null;
   // jshint camelcase: false
   // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
+  console.log("IDM URL: "+url);
   oauth.get(url, req.session.access_token,
   // jshint camelcase: true
   // jscs:enable
